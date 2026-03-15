@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokémon TCG – Jogo de Cartas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== TELA INICIAL ========== -->
+  <div id="start-screen" class="screen active">
+    <div class="start-bg"></div>
+    <div class="start-content">
+      <div class="pokeball-spin">&#9679;</div>
+      <h1 class="game-title">Pokémon TCG</h1>
+      <p class="game-subtitle">Jogo de Cartas Interativo</p>
+      <button id="btn-start" class="btn-primary">▶ Iniciar Jogo</button>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: ROLAGEM DE DADOS ========== -->
+  <div id="dice-modal" class="modal hidden">
+    <div class="modal-box">
+      <h2>🎲 Quem Começa?</h2>
+      <div class="dice-row">
+        <div class="dice-col">
+          <div class="dice-label">👤 Você</div>
+          <div id="dice-player" class="dice">–</div>
+        </div>
+        <div class="dice-sep">VS</div>
+        <div class="dice-col">
+          <div class="dice-label">🤖 CPU</div>
+          <div id="dice-cpu" class="dice">–</div>
+        </div>
+      </div>
+      <div id="dice-result" class="dice-result">Rolando dados…</div>
+    </div>
+  </div>
+
+  <!-- ========== TELA DO JOGO ========== -->
+  <div id="game-screen" class="screen">
+
+    <!-- HEADER -->
+    <header id="game-header">
+      <div class="header-logo">⚡ Pokémon TCG</div>
+
+      <div class="header-center">
+        <div id="turn-badge" class="turn-badge">
+          <span id="turn-icon">👤</span>
+          <span id="turn-text">Turno: Você</span>
+        </div>
+        <div id="phase-hint" class="phase-hint">Selecione uma carta da sua mão</div>
+      </div>
+
+      <div class="header-right">
+        <span>🃏 Seu Deck: <strong id="player-deck-count">0</strong></span>
+        <span class="hdr-sep">|</span>
+        <span>🤖 CPU Deck: <strong id="cpu-deck-count">0</strong></span>
+      </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div id="game-layout">
+
+      <!-- LEFT: Battle Log -->
+      <aside id="log-panel">
+        <div class="panel-title">📜 Log de Batalha</div>
+        <div id="battle-log"></div>
+      </aside>
+
+      <!-- CENTER: Arena -->
+      <div id="arena">
+
+        <!-- CPU Side -->
+        <div id="cpu-side" class="battle-side">
+          <div class="side-info">
+            <span class="side-name">🤖 CPU</span>
+            <span class="side-hand-count">Mão: <strong id="cpu-hand-count">0</strong></span>
+          </div>
+
+          <!-- CPU face-down hand -->
+          <div id="cpu-hand-display" class="cpu-hand-display"></div>
+
+          <!-- CPU Active Pokémon -->
+          <div id="cpu-active-slot" class="active-slot">
+            <div class="slot-placeholder">Aguardando…</div>
+          </div>
+        </div>
+
+        <!-- VS Divider -->
+        <div id="arena-divider">
+          <div class="divider-line"></div>
+          <div class="vs-badge">VS</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Player Side -->
+        <div id="player-side" class="battle-side">
+
+          <!-- Player Active Pokémon -->
+          <div id="player-active-slot" class="active-slot">
+            <div class="slot-placeholder">Selecione uma carta 👇</div>
+          </div>
+
+          <!-- Player Hand -->
+          <div class="hand-label">Sua Mão</div>
+          <div id="player-hand" class="player-hand"></div>
+
+          <div class="side-info">
+            <span class="side-name">👤 Você</span>
+          </div>
+        </div>
+
+      </div><!-- /arena -->
+
+      <!-- RIGHT: Stones + Actions -->
+      <aside id="action-panel">
+
+        <div class="panel-title">💎 Pedras de Evolução</div>
+        <div id="stones-display" class="stones-grid"></div>
+
+        <hr class="panel-hr" />
+
+        <div class="panel-title">⚔️ Ações</div>
+        <div class="action-buttons">
+          <button id="btn-use-stone" class="btn-action btn-stone" disabled>
+            ✨ Usar Pedra
+          </button>
+          <button id="btn-attack" class="btn-action btn-attack-action" disabled>
+            ⚔️ Atacar!
+          </button>
+        </div>
+
+        <hr class="panel-hr" />
+
+        <div class="panel-title">📊 Pokémon Ativo</div>
+        <div id="active-status" class="active-status">
+          <div class="status-empty">Nenhum Pokémon</div>
+        </div>
+
+      </aside>
+
+    </div><!-- /game-layout -->
+  </div><!-- /game-screen -->
+
+  <!-- ========== TELA DE FIM DE JOGO ========== -->
+  <div id="gameover-screen" class="screen">
+    <div class="gameover-box">
+      <div id="gameover-emoji" class="gameover-emoji"></div>
+      <div id="gameover-text" class="gameover-text"></div>
+      <button id="btn-restart" class="btn-primary">🔄 Jogar Novamente</button>
+    </div>
+  </div>
+
+  <!-- Flash overlay for attack effects -->
+  <div id="flash-overlay" class="flash-overlay hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
